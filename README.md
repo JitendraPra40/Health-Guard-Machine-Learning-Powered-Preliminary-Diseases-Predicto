@@ -26,9 +26,9 @@ This webapp was developed using Flask Web Framework and was deployed on Heroku s
 
 ## NOTE
 
-==> You can access the website live at: https://kvg-disease-predictor.herokuapp.com <br>
+==> You can access the website live at:  <br>
 ==> Python version 3.6.8 was used for the whole project.<br>
-==> You can find all the models in [models](https://github.com/venugopalkadamba/Multi_Disease_Predictor/tree/master/models) folder.
+
 
 ## Steps to run this application in your system
 
