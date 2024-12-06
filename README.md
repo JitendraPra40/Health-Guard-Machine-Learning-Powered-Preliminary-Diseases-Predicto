@@ -24,11 +24,7 @@ The application integrates multiple pre-trained models to predict the likelihood
     ├── home.html
     ├── kidney.html
     ├── liver.html
-    ├── main.html
-    ├── malaria_predict.html
-    ├── malaria.html
-    ├── pneumonia_predict.html
-    ├── pneumonia.html
+    ├── main.html  
     └── predict.html
 ```
 
@@ -73,8 +69,6 @@ The application uses pre-trained models stored in a `models/` directory (not sho
 - `models/heart.pkl`
 - `models/kidney.pkl`
 - `models/liver.pkl`
-- `models/malaria.h5`
-- `models/pneumonia.h5`
 
 ### Common Use Cases
 
