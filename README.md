@@ -1,14 +1,8 @@
-# Multiple Disease Predictor
+# Multi-Disease Prediction Web Application
 
-## About
+This Flask-based web application serves as a comprehensive medical diagnosis tool, utilizing machine learning models to predict various diseases based on user-input medical data and images.
 
-This webapp was developed using Flask Web Framework and was deployed on Heroku server. The models used to predict the diseases were trained on large Datasets. All the links for datasets and the python notebooks used for model creation are mentioned below in this readme. The webapp can predict following Diseases:
-
-- Diabetes
-- Breast Cancer
-- Heart Disease
-- Kidney Disease
-- Liver Disease
+The application integrates multiple pre-trained models to predict the likelihood of diabetes, breast cancer, heart disease, kidney disease, liver disease, malaria, and pneumonia. It provides an intuitive interface for users to input their medical data or upload relevant images, and receive instant predictions based on state-of-the-art machine learning algorithms.
 
 ## 📸 Screenshots  
 ### 1. Home Page  
@@ -17,58 +11,114 @@ This webapp was developed using Flask Web Framework and was deployed on Heroku s
 ### 2. Prediction Result  
 ![Prediction Result](./img/2.png)  
 
-
-## Models with their Accuracy of Prediction
-
-| Disease        | Type of Model            | Accuracy |
-| -------------- | ------------------------ | -------- |
-| Diabetes       | Machine Learning Model   | 72.72%   |
-| Breast Cancer  | Machine Learning Model   | 96.49%   |
-| Heart Disease  | Machine Learning Model   | 86.89%   |
-| Kidney Disease | Machine Learning Model   | 96.88%   |
-| Liver Disease  | Machine Learning Model   | 76.27%   |
-
-
-## NOTE
-
-==> Python version 3.6.8 was used for the whole project.<br>
-
-
-## Steps to run this application in your system
-
-1. Clone or download the repo.
-2. Open command prompt in the downloaded folder.
-3. Create a virtual environment
+## Repository Structure
 
 ```
-mkvirtualenv environment_name
+.
+├── app.py
+├── README.md
+└── templates
+    ├── breast_cancer.html
+    ├── diabetes.html
+    ├── heart.html
+    ├── home.html
+    ├── kidney.html
+    ├── liver.html
+    ├── main.html
+    ├── malaria_predict.html
+    ├── malaria.html
+    ├── pneumonia_predict.html
+    ├── pneumonia.html
+    └── predict.html
 ```
 
-4. Install all the dependencies:
+- `app.py`: The main Flask application file containing all route definitions and prediction logic.
+- `templates/`: Directory containing HTML templates for each disease prediction page and results.
 
-```
-pip install -r requirements.txt
+## Usage Instructions
+
+### Installation
+
+1. Ensure you have Python 3.7+ installed.
+2. Clone the repository to your local machine.
+3. Navigate to the project directory.
+4. Install the required dependencies:
+
+```bash
+pip install flask pillow numpy tensorflow
 ```
 
-5. Run the application
+### Getting Started
 
-```
+1. Run the Flask application:
+
+```bash
 python app.py
 ```
 
-## Dataset Links
+2. Open a web browser and navigate to `http://localhost:5000`.
 
-All the datasets were used from kaggle.
+3. Use the home page to select the disease you want to predict.
 
-- [Diabetes Dataset](https://www.kaggle.com/uciml/pima-indians-diabetes-database)
-- [Breast Cancer Dataset](https://www.kaggle.com/uciml/breast-cancer-wisconsin-data)
-- [Heart Disease Dataset](https://www.kaggle.com/ronitf/heart-disease-uci)
-- [Kidney Disease Dataset](https://www.kaggle.com/mansoordaku/ckdisease)- [Liver Disease Dataset](https://www.kaggle.com/uciml/indian-liver-patient-records)
+4. Input the required medical data or upload an image as prompted.
 
-## Links for Python Notebooks used for model creation
+5. Submit the form to receive the prediction result.
 
-- [Diabetes Notebook](https://github.com/venugopalkadamba/Multi_Disease_Predictor/blob/master/Python%20Notebooks/Diabetes_Prediction.ipynb)
-- [Breast Cancer Notebook](https://github.com/venugopalkadamba/Multi_Disease_Predictor/blob/master/Python%20Notebooks/Cancer_Prediction.ipynb)
-- [Heart Disease Notebook](https://github.com/venugopalkadamba/Multi_Disease_Predictor/blob/master/Python%20Notebooks/Heart_Disease_Prediction.ipynb)
-- [Kidney Disease Notebook](https://github.com/venugopalkadamba/Multi_Disease_Predictor/blob/master/Python%20Notebooks/Kidney_Disease_Prediction.ipynb)
-- [Liver Disease Notebook](https://github.com/venugopalkadamba/Multi_Disease_Predictor/blob/master/Python%20Notebooks/Liver_Disease_Prediction.ipynb)
+### Configuration
+
+The application uses pre-trained models stored in a `models/` directory (not shown in the repository structure). Ensure that the following model files are present:
+
+- `models/diabetes.pkl`
+- `models/breast_cancer.pkl`
+- `models/heart.pkl`
+- `models/kidney.pkl`
+- `models/liver.pkl`
+- `models/malaria.h5`
+- `models/pneumonia.h5`
+
+### Common Use Cases
+
+1. Diabetes Prediction:
+   - Navigate to the diabetes prediction page.
+   - Input the required medical data (8 parameters).
+   - Submit the form to receive the prediction.
+
+2. Malaria Prediction:
+   - Go to the malaria prediction page.
+   - Upload an image of a blood smear.
+   - Submit to get the prediction result.
+
+### Troubleshooting
+
+- If you encounter a "Please enter valid Data" message:
+  - Ensure all input fields are filled with appropriate numerical values.
+  - Check for any non-numeric characters in the input fields.
+
+- If you see a "Please upload an Image" message for malaria or pneumonia prediction:
+  - Verify that you have selected an image file before submitting.
+  - Ensure the image file is in a supported format (e.g., JPEG, PNG).
+
+- Debug Mode:
+  - The application runs in debug mode by default.
+  - Check the console output for detailed error messages and stack traces.
+
+## Data Flow
+
+The application follows a straightforward request-response flow:
+
+1. User selects a disease prediction option from the home page.
+2. The corresponding HTML template is rendered, prompting for input.
+3. User submits the form with medical data or an uploaded image.
+4. The Flask backend processes the input:
+   - For text-based input: Data is converted to a list and passed to the `predict()` function.
+   - For image input: The image is preprocessed and passed to the appropriate deep learning model.
+5. The prediction result is generated using the pre-trained model.
+6. The result is rendered on a prediction result page and displayed to the user.
+
+```
+[User] -> [Home Page] -> [Disease-Specific Input Page] -> [Form Submission]
+    -> [Flask Backend] -> [Data Preprocessing] -> [ML Model Prediction]
+    -> [Result Processing] -> [Prediction Result Page] -> [User]
+```
+
+Note: The application uses separate routes and prediction logic for each disease, allowing for modularity and easy expansion of the system to include additional diseases in the future.
